@@ -1,14 +1,452 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Parade attendence</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+              margin: 20px;
+              background-image: url("<?!= backgroundImageUrl ?>");
+              background-size: cover; /* Optional: Adjusts image to cover the entire element */
+              background-repeat: no-repeat; /* Optional: Prevents image repetition */
+              background-position: center; /* Optional: Centers the image */
+              background-color: #f4f4f4;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 90vh;
+            }
+.container {
+background-color: #fff;
+opacity: 0.98; /* Makes the entire div 50% transparent */
+padding: 25px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0,0,0,0.1); 
+max-width: 500px; 
+width : 100%;                                                                        
+}
+h1 {
+text-align: center;
+color: #333;
+margin-bottom: 25px;
+}
+h2 {
+text-align: center;
+color: #333;
+margin-bottom: 25px;
+}
+label {
+display: block;
+margin-bottom: 8px;
+font-weight: bold;
+color: #555;
+}
+input[type="text"], select {
+width: calc(100% - 22px);
+padding: 10px;
+margin-bottom: 15px;
+border: 1px solid #ddd;
+border-radius: 4px;
+font-size: 16px;
+}
+button {
+padding: 10px 15px;
+background-color: #007bff;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 16px;
+display: block;
+width: 100%;
+margin-bottom: 15px;
+}
+button:hover {
+background-color: #0056b3;
+}
+input[type="submit"] {
+width: 100%;
+padding: 12px;
+background-color: #28a745;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+font-size: 18px;
+font-weight: bold;
+margin-top: 20px;
+}
+input[type="submit"]:hover {
+background-color: #218838;
+}
+#locationStatus {
+margin-top: 10px;
+font-style: italic;
+color: #555;
+text-align: center;
+margin-bottom: 15px;
+}
+#responseMessage {
+margin-top: 20px;
+padding: 10px;
+border-radius: 4px;
+text-align: center;
+font-weight: bold;
+}
+       .success {
+background-color: #d4edda;
+color: #155724;
+border: 1px solid #c3e6cb;
+}
+.error {
+background-color: #f8d7da;
+color: #721c24;
+border: 1px solid #f5c6cb;
+}
+.hidden {
+display: none;
+}
+p.help-text {
+font-size: 0.9em;
+color: #777;
+margin-bottom: 10px;
+}
+.popup-hidden {
+  display: none; /* Hides the pop-up initially */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+  z-index: 1000; /* Ensures it's on top of other content */
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+</style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+<div class="container">
+<h1>Aniruddha's Parade Pathak</h1>
+<h1>अनिरुद्ध परेड पथक</h1>
+<h2>Parade Attendence / परेड उपस्थिती</h2>
+<form id="dataForm">
+<div id="buttonDiv"></div>
+<label for="name">Name / नाव :</label>
+<input type="text" id="name" name="name" required>
+<label for="parade_Center">Parade Center / परेड केंद्र:</label>
+<select id="parade_Center" name="parade_Center" required>
+<option value="">Select Parade Center / परेड केंद्र निवडा</option>
+<!--<option value="SHGG">SHGG / श्रीहरिगुरुग्राम</option>
+<option value="Marol">Marol / मरोळ</option>
+<option value="Malad">Malad / मलाड</option>
+<option value="Extended Western Zone">Extended Western Zone / एक्सटेंडेड वेस्टर्न झोन</option>
+<option value="Dombivli">Dombivl / डोंबिवली </option>
+<option value="Kharegaon">Kharegaon / खारेगाव</option>
+<option value="Juinagar">Juinagar / जुईनगर</option>
+<option value="Badlapur">Badlapur / बदलापुर</option>-->
+</select>
+<label for="parade_Ground">Parade Ground / परेड ग्राउंड:</label>
+<select id="parade_Ground" name="parade_Ground" required>
+<option value="">Select Parade Ground / परेड ग्राउंड निवडा</option>
+<!--<option value="SHGG">SHGG / श्रीहरिगुरुग्राम</option>
+<option value="Vasai">Vasai / वसई</option>
+<option value="Dombivli">Dombivli / डोंबिवली</option>
+<option value="Kharegaon">Kharegaon / खारेगाव</option>
+<option value="Juinagar">Juinagar / जुईनगर</option>
+<option value="Badlapur">Badlapur / बदलापुर</option>-->
+</select>
+<h3>Location Details:</h3>
+<p class="help-text">Click the button below to get your current location. Your browser will ask for permission.<br>तुमचे सध्याचे लोकेशन मिळवण्यासाठी खालील बटणावर क्लिक करा. तुमचा ब्राउझर परवानगी मागेल.</p>
+<button type="button" id="getLocationBtn" onclick="getCurrentLocation()">Get My Current Location <br> माझे वर्तमान लोकेशन</button>
+<p id="locationStatus">No location captured yet.<br>अद्याप कोणतेही लोकेशन कॅप्चर केलेले नाही.</p>
+<input type="hidden" id="latitude" name="latitude">
+<input type="hidden" id="longitude" name="longitude">
+<div id="manualLocationDiv" class="hidden">
+<p class="help-text">Auto-detection failed or permission denied.</p>
+<!--<label for="manualLocation">Manual Location (e.g., address, landmark):</label>
+<input type="text" id="manualLocation" name="manualLocation">-->
+</div>
+<div id="myPopup" class="popup-hidden">
+  <div class="popup-content">
+    <h2>Alert Message</h2>
+    <p id="MessageboxText">This is your pop-up message content.</p>
+    <button type="button" onclick="closePopup()">Close</button>
+  </div>
+</div>
+
+<input type="submit" value="Submit Data">
+</form>
+<div id="responseMessage"></div>
+</div>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+// --- REPLACE THIS WITH YOUR DEPLOYED GOOGLE APPS SCRIPT WEB APP URL ---//
+
+/*function handleCredentialResponse(response) {
+        // Decode the ID token to get user information
+        const idToken = response.credential;
+        const decodedToken = JSON.parse(atob(idToken.split('.')[1]));
+        console.log("User Email:", decodedToken.email);
+        console.log("User Name:", decodedToken.name);
+        alert(idToken)
+        // You can send this ID token to your backend for verification
+        // and further processing if needed.
+      }
+
+      window.onload = function () {
+        google.accounts.id.initialize({
+          client_id: "299878558133-6hosqsou799f625oterqd1fom8r1vfnu.apps.googleusercontent.com", // Replace with your client ID
+          callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+          document.getElementById("buttonDiv"),
+          { theme: "outline", size: "large" }  // Customize button appearance
+        );
+      };
+*/
+function openPopup(messageText) {
+  document.getElementById('myPopup').style.display = 'flex'; /* Shows the pop-up */
+  document.getElementById('MessageboxText').innerHTML  = messageText;
+}
+
+function closePopup() {
+  document.getElementById('myPopup').style.display = 'none'; /* Hides the pop-up */
+}
+
+async function fetchSheetData() {
+  try {
+    // Replace 'yourCloudFunctionName' with the actual name of your Cloud Function
+    const response = await fetch('https://YOUR_REGION-YOUR_PROJECT_ID.cloudfunctions.net/yourCloudFunctionName');
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    
+    const data = await response.json();
+    console.log("Data from Google Sheet:", data);
+    // Now you can use 'data' to update your HTML
+    return data;
+    
+  } catch (error) {
+    console.error("Could not fetch data from Google Sheet via Cloud Function:", error);
+  }
+}
+
+// Call the function when your page loads or on a button click
+// fetchSheetData();
+
+
+const WEB_APP_URL = "";
+const dataForm = document.getElementById('dataForm');
+const getLocationBtn = document.getElementById('getLocationBtn');
+const locationStatus = document.getElementById('locationStatus');
+const latitudeInput = document.getElementById('latitude');
+const longitudeInput = document.getElementById('longitude');
+const responseMessage = document.getElementById('responseMessage');
+let isLocationCaptured = false; // Flag to track if location was auto-captured
+
+// Function to get current location using Geolocation API
+function getCurrentLocation() {
+locationStatus.textContent = 'Attempting to get your location. (Browser will ask for permission)';
+
+
+openPopup('Attempting to get your location... (Browser will ask for permission)');
+//alert('Attempting to get your location... (Browser will ask for permission)')
+//getLocationBtn.disabled = true; // Disable button while getting location
+
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(
+(position) => {
+latitudeInput.value = position.coords.latitude;
+longitudeInput.value = position.coords.longitude;
+locationStatus.textContent = `Location Captured: Lat ${position.coords.latitude.toFixed(4)}, Lon ${position.coords.longitude.toFixed(4)}`;
+locationStatus.style.color = '#155724'; // Greenish color for success
+isLocationCaptured = true;
+document.getElementById('getLocationBtn').disabled = true; // Re-enable button
+},
+(error) => {
+console.error('Error getting location:', error);
+let errorMessage = 'Failed to get location.';
+switch(error.code) {
+case error.PERMISSION_DENIED:
+errorMessage += "Please enable location in your device and allow browser to access./कृपया तुमच्या डिव्हाइसमध्ये लोकेशन अलॉव करा आणि ब्राउझरला परवानगी द्या."; 
+openPopup("Please enable location in your device and allow browser to access/कृपया तुमच्या डिव्हाइसमध्ये लोकेशन अलॉव करा आणि ब्राउझरला परवानगी द्या.");
+break;
+case error.POSITION_UNAVAILABLE:
+errorMessage += "Location information is unavailable.";
+break;
+case error.TIMEOUT:
+errorMessage += "The request to get user location timed out./वापरकर्त्याचे लोकेशन मिळवण्याची विनंती कालबाह्य झाली.";
+break;
+case error.UNKNOWN_ERROR:
+errorMessage += "An unknown error occurred.";
+break;
+}
+locationStatus.style.color = '#721c24'; // Reddish color for error
+locationStatus.textContent = errorMessage;
+isLocationCaptured = false; // Reset flag
+//getLocationBtn.disabled = false; // Re-enable button
+},
+  // Options for getCurrentPosition
+{ enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+);
+} else {
+locationStatus.textContent = 'Geolocation is not supported by your browser. Please try another browser/device/तुमच्या ब्राउझरद्वारे लोकेशन मिळू शकत नाही. कृपया दुसरे ब्राउझर/मोबाईल वापरून पहा.';
+locationStatus.style.color = '#721c24'; // Reddish color for error
+isLocationCaptured = false; // Reset flag
+//getLocationBtn.disabled = true; // Re-enable button
+}
+}
+/***************************************************************************/
+
+async function callAppsScriptFunction() {
+const nameInput = document.getElementById('name').value;
+const parade_Center_Input = document.getElementById('parade_Center').value;
+const parade_Ground_Input = document.getElementById('parade_Ground').value;
+const latitudeInput = document.getElementById('latitude').value;
+const longitudeInput = document.getElementById('longitude').value;
+
+try{
+
+    var respMessage = JSON.stringify({ status: 'Working', message: 'Data is uploading.' });
+
+    function successFunc(resultString) {
+      var result = JSON.parse(resultString)
+      if (result.status == "Duplicate-ERROR")
+      {
+      responseMessage.className = 'error';
+      responseMessage.innerHTML = result.message;
+      openPopup(result.message)
+      return result.message;
+      }
+      else
+      {
+      responseMessage.className = 'success';
+      responseMessage.textContent = 'Data submitted successfully!/डेटा यशस्वीरित्या सबमिट झाला!';
+      dataForm.reset(); // Clear the form fields
+      // Reset location specific fields
+      latitudeInput.value = '';
+      longitudeInput.value = '';
+      isLocationCaptured = false; // Reset location flag
+      locationStatus.textContent = 'No location captured yet./अद्याप कोणतेही लोकेशन कॅप्चर केलेले नाही.'; // Reset status message
+      locationStatus.style.color = '#555'; // Reset color
+      return "Data successfully recorded/डेटा यशस्वीरित्या सबमिट झाला.";
+      // console.log(result); // "Hello from the server!"
+      }
+      }
+
+    function errorFunc(error) {
+          
+      responseMessage.className = 'error';
+      responseMessage.textContent = `Failed to submit data. Please check for details./डेटा सबमिट करण्यात अयशस्वी. कृपया तपशील तपासा. Error: ${error.message}`;
+      
+      return error.message;
+      //console.error("Error:", error);
+    }
+          
+    respMessage = await google.script.run.withSuccessHandler(successFunc).withFailureHandler(errorFunc).dataStore(nameInput,parade_Center_Input,parade_Ground_Input,latitudeInput,longitudeInput);
+          
+    return respMessage;
+  }
+  catch (error) {
+    console.error('Fetch error:', error);
+    responseMessage.className = 'error';
+    responseMessage.textContent = `Failed to submit data. Please check for details/डेटा सबमिट करण्यात अयशस्वी. कृपया तपशील तपासा. Error: ${error.message}`;
+    return JSON.stringify({ status: 'ERROR', message: error.message });
+  }
+}
+
+/**************************************************************************/
+
+
+/*try {
+var selectDataString = <?= options ?>; 
+var selectData = selectDataString.split(",");
+
+const selectForm = document.getElementById('parade_Center');
+for(var i=0;i<selectData.length;i++)
+{
+  var option1 = document.createElement('option');
+  var optionText = selectData[i];
+  if(optionText !="")
+  {
+    option1.value = optionText;
+    option1.textContent = optionText;
+    selectForm.appendChild(option1);
+  }
+};
+
+var selectDataString2 = <?= options2 ?>; 
+var selectData2 = selectDataString2.split(",");
+
+const selectForm2 = document.getElementById('parade_Ground');
+for(var l=0;l<selectData2.length;l++)
+{
+  var option2 = document.createElement('option');
+  var optionText2 = selectData2[l];
+  if(optionText2 !="")
+  {
+    option2.value = optionText2;
+    option2.textContent = optionText2;
+    selectForm2.appendChild(option2);
+  }
+};
+
+
+
+}
+catch (error)
+{
+   console.error('Fetch error:', error);
+    responseMessage.className = 'error';
+    responseMessage.textContent = `Failed to get details. Please check for details. Error: ${error.message}`;
+}
+
+*/
+
+
+
+// Event listener for the "Get Location" button
+//getLocationBtn.addEventListener('click', getCurrentLocation());
+// Form submission handler
+dataForm.addEventListener('submit', async (e) => {
+e.preventDefault(); // Prevent default form submission
+// Basic validation for location: either auto-captured or manual entered
+if (!isLocationCaptured) {
+locationStatus.textContent = 'Please get your location/कृपया तुमचे लोकेशन मिळवा';
+locationStatus.style.color = 'orange'; // Indicate missing info
+return;
+}
+responseMessage.className = ''; // Clear previous classes
+responseMessage.textContent = 'Submitting data../डेटा सबमिट करत आहे...';
+const formData = new FormData(dataForm);
+const data = {};
+for (let [key, value] of formData.entries()) {
+data[key] = value;
+}
+try {
+const response = await callAppsScriptFunction(); //await fetch(WEB_APP_URL);
+} catch (error) {
+console.error('Fetch error:', error);
+responseMessage.className = 'error';
+responseMessage.textContent = `Failed to submit data. Please check console for details/डेटा सबमिट करण्यात अयशस्वी. कृपया तपशील तपासा. Error: ${error.message}`;
+}
+});
+// Optionally, you can try to get location automatically on page load:
+ // Uncomment this line if you want the location prompt to appear immediately
+getCurrentLocation();
+
+</script>
 </body>
 </html>
